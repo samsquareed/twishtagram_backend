@@ -5,14 +5,17 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 dotenv.config()
 import AuthRoute from "./routes/auth.js"
+import PostRoute from "./routes/posts.js"
 
 const app = express();
+app.use(cors());
+app.use(express.json())
 const PORT = process.env.PORT || 8080;
 
 //middlewares
 app.use(bodyParser.json({ limit: '20mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
-app.use(cors());
+
 
 mongoose.connect(process.env.MONGOURI, ()=>{
     console.log("connected to Db");
@@ -21,6 +24,7 @@ mongoose.connect(process.env.MONGOURI, ()=>{
 
 //custom routes middlewares
 app.use("/auth", AuthRoute)
+app.use("/posts",PostRoute)
 
 
 app.get("/", (req, res)=>{
