@@ -9,7 +9,7 @@ import PostRoute from "./routes/posts.js"
 
 const app = express();
 app.use(cors());
-app.use(express.json())
+// app.use(express.json())
 const PORT = process.env.PORT || 8080;
 
 //middlewares
@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGOURI, ()=>{
 
 //custom routes middlewares
 app.use("/auth", AuthRoute)
-app.use("/posts",PostRoute)
+app.use("/post",PostRoute)
 
 
 app.get("/", (req, res)=>{
